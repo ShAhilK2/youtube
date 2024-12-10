@@ -4,7 +4,8 @@ const appSlice = createSlice({
     name:"app",
     initialState:{
         isMenuOpen:true,
-        popularVideos:null
+        popularVideos:null,
+        movieById:null
     },
     reducers:{
         toggleMenu:(state)=>{
@@ -12,12 +13,18 @@ const appSlice = createSlice({
         },
         addPopularVideos:(state,action)=>{
             state.popularVideos = action.payload
+        },
+        closeMenu :(state,action)=>{
+            state.isMenuOpen = false;
+        },
+        addMovieById:(state,action)=>{
+            state.movieById =action.payload
         }
 
     }
 })
 
 
-export const {toggleMenu,addPopularVideos} = appSlice.actions;
+export const {toggleMenu,addPopularVideos,closeMenu,addMovieById} = appSlice.actions;
 
 export default appSlice.reducer;

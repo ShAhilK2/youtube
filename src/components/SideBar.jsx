@@ -28,6 +28,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
@@ -37,10 +38,12 @@ const SideBar = () => {
     isMenuOpen && (
       <div className="py-2 flex flex-col items-start gap-2 sm:w-[20%] h-auto  overflow-x-scroll ">
         {/* Home Button */}
-        <button className="flex items-center gap-3 w-full px-4 py-2 hover:bg-gray-100 rounded-lg">
-          <FontAwesomeIcon icon={faHouse} className="text-xl text-gray-700" />
-          <span className="text-base font-medium text-gray-800">Home</span>
-        </button>
+        <Link to={"/"}>
+          <button className="flex items-center gap-3 w-full px-4 py-2 hover:bg-gray-100 rounded-lg">
+            <FontAwesomeIcon icon={faHouse} className="text-xl text-gray-700" />
+            <span className="text-base font-medium text-gray-800">Home</span>
+          </button>
+        </Link>
 
         {/* Shorts Button */}
         <button className="flex items-center gap-3 w-full px-4 py-2 hover:bg-gray-100 rounded-lg">

@@ -1,10 +1,12 @@
 import React from "react";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 const ButtonList = () => {
   return (
     <div className="flex gap-2 pl-5 whitespace-nowrap overflow-y-scroll w-screen">
       <Button>All</Button>
+
       <Button>Music</Button>
       <Button>Mixes</Button>
       <Button>Frequencies</Button>

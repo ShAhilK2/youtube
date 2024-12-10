@@ -1,8 +1,18 @@
-# React + Vite
+<!-- Youtube Clone -->
+<!-- Popular Videos -->
+<!-- By Video Id Watch Page -->
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<!-- Debouncing -->
 
-Currently, two official plugins are available:
+typing slow = 200ms
+typing fast = 30ms
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+performance :
+
+- iphome pro max = 14 letter \* 1000 =14000
+- with debouncing = 3 Api Calls \* 1000 =30000
+
+Debouncing with 200ms
+
+- if difference between keystroke is < 200ms : declined Api Call
+- > 200ms : Make Api Call

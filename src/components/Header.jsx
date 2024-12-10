@@ -1,17 +1,47 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utilis/appSlice";
+import { YOUTUBE_SEARCH_API } from "../utilis/constant";
+import { cacheresults } from "../utilis/seachSlice";
 
 const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestion, setShowSuggestion] = useState(false);
   const dispatch = useDispatch();
+
+  const searchCache = useSelector((store) => store.search);
+  const getSearchSuggestion = async () => {
+    console.log("API CALL -" + searchQuery);
+    const res = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const data = await res.json();
+    setSuggestions(data[1]);
+    dispatch(
+      cacheresults({
+        [searchQuery]: data[1],
+      })
+    );
+  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchCache[searchQuery]) {
+        return setSuggestions(searchCache[searchQuery]);
+      } else {
+        return getSearchSuggestion();
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
   return (
-    <header className="flex items-center justify-between px-6 py-4 shadow ">
+    <header className="flex items-center justify-between px-6 py-4 shadow  ">
       {/* Left Section */}
       <div className="flex items-center space-x-4">
         <FontAwesomeIcon
@@ -27,15 +57,39 @@ const Header = () => {
       </div>
 
       {/* Middle Section */}
-      <div className="flex items-center w-1/2">
-        <input
-          type="text"
-          placeholder="Search"
-          className="flex-grow py-2 pl-4 rounded-l-full border border-gray-300 focus:outline-none focus:ring focus:ring-gray-400"
-        />
-        <button className="px-4 py-2 bg-gray-100 text-gray-400 rounded-r-full hover:bg-gray-50">
-          <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
-        </button>
+      <div className="flex flex-col w-1/2">
+        <div className="flex items-center ">
+          <input
+            type="text"
+            placeholder="Search"
+            className="flex-grow py-2 pl-4 rounded-l-full border border-gray-300 focus:outline-none focus:ring focus:ring-gray-400"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.currentTarget.value)}
+            onFocus={() => setShowSuggestion(true)}
+            onBlur={() => setShowSuggestion(false)}
+          />
+          <button className="px-4 py-2 bg-gray-100 text-gray-400 rounded-r-full hover:bg-gray-50">
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
+          </button>
+        </div>
+        {showSuggestion && (
+          <div className="fixed top-[58px] bg-white  w-[45%] shadow-lg rounded-lg border border-gray-100 hover:border-gray-300 z-10 ">
+            <ul>
+              {suggestions.map((s) => (
+                <li
+                  key={s}
+                  className="py-2 px-5 flex gap-2 items-center  shadow-sm hover:pointer hover:bg-gray-300"
+                >
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="text-xl"
+                  />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       {/* Right Section */}
