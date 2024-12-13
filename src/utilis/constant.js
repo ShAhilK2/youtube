@@ -12,3 +12,8 @@ export const YOUTUBE_SEARCH_API = `http://suggestqueries.google.com/complete/sea
 export const OFFSET_YOUTUBE_LIVE = 250;
 
 
+export const SEARCH_FROM_KEYWORD  =(query)=>{
+    return `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&key=${YT_KEY}`
+} 
+
+

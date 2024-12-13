@@ -23,7 +23,7 @@ const VideoContainer = () => {
   if (!popularVideos || popularVideos.length === 0) return <p>Loading...</p>;
 
   return (
-    <div className="video-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 px-4">
+    <div className="video-container grid grid-cols-1 mx-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6 px-4">
       {popularVideos.map((video) => {
         return (
           <Link to={`/watch?v=${video.id}`} key={video.id}>
