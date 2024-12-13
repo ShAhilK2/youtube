@@ -40,7 +40,7 @@ const WatchPage = () => {
   return (
     <div
       className={`p-4 flex flex-col lg:flex-row gap-6 transition-all duration-300 ${
-        isMenuOpen ? "lg:w-[85%]" : "lg:w-full"
+        isMenuOpen ? "w-[70%] sm:w-[85%] " : "w-full"
       }`}
     >
       {/* Video Player and Details Section */}

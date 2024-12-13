@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utilis/appSlice";
 import { SEARCH_FROM_KEYWORD, YOUTUBE_SEARCH_API } from "../utilis/constant";
 import { cacheresults } from "../utilis/seachSlice";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -56,17 +57,22 @@ const Header = () => {
   return (
     <header className="flex items-center justify-between px-4  shadow-md md:px-6 ">
       {/* Left Section */}
+
       <div className="flex items-center space-x-4">
         <FontAwesomeIcon
           icon={faBars}
           className="text-xl text-black cursor-pointer md:text-2xl"
           onClick={handleToggleMenu}
         />
-        <img
-          src="https://cdn.worldvectorlogo.com/logos/youtube-6.svg"
-          alt="Logo"
-          className="w-14 h-14 md:w-20 md:h-20"
-        />
+        {/* <Link to={"/"}> */}
+        <a href="/">
+          <img
+            src="https://cdn.worldvectorlogo.com/logos/youtube-6.svg"
+            alt="Logo"
+            className="w-14 h-14 md:w-20 md:h-20"
+          />
+        </a>
+        {/* </Link> */}
       </div>
 
       {/* Middle Section */}
